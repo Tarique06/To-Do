@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require("express")
 const app = express()
+const cors = require("cors")
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 
@@ -8,6 +9,12 @@ const PORT = process.env.PORT
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+var corsOptions = {
+    origin: "http://localhost:8081"
+}
+
+app.use(cors(corsOptions))
 
 const swaggerOptions = {
     swaggerDefinition: {
