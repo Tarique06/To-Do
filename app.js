@@ -37,12 +37,25 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 // Routes
 /**
  * @swagger
- * /getUsers:
- *  get:
- *    description: Use to request all users
+ * /createUsers:
+ *  post:
+ *    description: Use to create user
  *    responses:
  *      '200':
- *        description: A successful get response
+ *        description: Succesfully creted a user
+ */
+app.post('/createUsers', (req, res) => {
+    res.status(200).send('created user')
+})
+
+/**
+ * @swagger
+ * /getUsers:
+ *  get:
+ *    description: Use to request a user
+ *    responses:
+ *      '200':
+ *        description: A successful get response for a user
  */
 app.get('/getUsers', (req, res) => {
     res.status(200).send('users results')
@@ -58,13 +71,25 @@ app.get('/getUsers', (req, res) => {
  *        description: A successful update response
  */
 app.put('/putUsers', (req, res) => {
-
     res.status(200).send('succesfully updated with desired results')
 })
 
+/**
+ * @swagger
+ * /deleteUsers:
+ *  delete:
+ *    description: Use to delete a users
+ *    responses:
+ *      '200':
+ *        description: successfully deleted user
+ */
+app.delete('/deleteUsers', (req, res) => {
+    res.status(200).send('succesfully deleted user')
+})
+
+
 const db = require("./middleware/index")
 db.sequelize.sync();
-
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`)

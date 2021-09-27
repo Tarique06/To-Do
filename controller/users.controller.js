@@ -1,5 +1,6 @@
 const todo = require('../models/users')
 
+//Creating a user
 exports.create = async (req, res) => {
     const { firstName, lastName, address, contactNumber, password, access_token } = req.body
     try {
@@ -12,4 +13,19 @@ exports.create = async (req, res) => {
         console.warn(error)
         res.status(500).send(error);
     };
+}
+
+//Finding a user with userid
+exports.findOne = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await Users.findByPk(id)
+        if (!user) throw new Error('User not found')
+        return res.send({ user })
+    }
+
+    catch (error) {
+        console.log(error)
+        res.status(500).send(error)
+    }
 }
