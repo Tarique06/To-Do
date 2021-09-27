@@ -42,7 +42,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
  *    description: Use to create user
  *    responses:
  *      '200':
- *        description: Succesfully creted a user
+ *        description: Succesfully created a user
  */
 app.post('/createUsers', (req, res) => {
     res.status(200).send('created user')

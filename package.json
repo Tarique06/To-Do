@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
+    "heroku-postbuild": "ng build --prod",
     "dev": "env-cmd -f .env nodemon app.js"
   },
   "keywords": [],
