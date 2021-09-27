@@ -9,7 +9,7 @@ const todo = Joi.object().keys({
     access_token: [
         Joi.string(),
         Joi.number()
-    ].required()
+    ]
 })
 
 module.exports = todo;

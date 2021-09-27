@@ -2,9 +2,9 @@ const todo = require('../models/users')
 
 //Creating a user
 exports.create = async (req, res) => {
-    const { firstName, lastName, address, contactNumber, password, access_token } = req.body
     try {
-        await todo.validateAsync({ firstName, lastName, address, contactNumber, password, access_token })
+        await todo.validateAsync(req.body)
+        await todo.create(req.body)
         return res.status(200).json({
             message: 'Created Database Schema for todo'
         })
