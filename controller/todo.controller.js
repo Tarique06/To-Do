@@ -1,10 +1,12 @@
 const todo = require('../models/todo')
+const ValidationTodo = require('../validation/todo.validate')
 
 //Creating a user
 exports.create = async (req, res) => {
     try {
         console.log(req.body)
-        await todo.validateAsync(req.body)
+
+        await ValidationTodo.validateAsync(req.body)
         await todo.create(req.body)
         return res.status(200).json({
             message: 'Created Database Schema for To Do.'
