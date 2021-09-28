@@ -1,11 +1,12 @@
 require('dotenv').config()
 const express = require("express")
-const app = express()
 const cors = require("cors")
 const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 
 const PORT = process.env.PORT
+
+const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -44,9 +45,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
  *      '200':
  *        description: Succesfully created a user
  */
-app.post('/createUsers', (req, res) => {
-    res.status(200).send('created user')
-})
+const create = require("./routes/todo.routes")
+app.use('/createUsers', create)
 
 /**
  * @swagger
@@ -94,7 +94,6 @@ db.sequelize.sync();
 app.get('/', (req, res) => {
     res.status(200).send('Welcome to To Do Application.')
 })
-
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`)

@@ -1,6 +1,7 @@
 const Joi = require('joi');
+const Todo = require("../models/todo")
 
-const todo = Joi.object().keys({
+const Todo = Joi.object({
     firstName: Joi.string().required(),
     lastName: Joi.string().required(),
     address: Joi.string().min(7).max(30).required(),
@@ -12,4 +13,4 @@ const todo = Joi.object().keys({
     ]
 })
 
-module.exports = todo;
+module.exports = Todo;
