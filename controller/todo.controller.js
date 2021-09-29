@@ -3,6 +3,7 @@ const ValidationTodo = require('../validation/todo.validate')
 
 //Creating a user
 exports.create = async (req, res) => {
+    const { firstName, lastName, address, contactNumber, password, access_token } = req.body
     try {
         await ValidationTodo.validateAsync(req.body)
         await Todo.create({ firstName, lastName, address, contactNumber, password, access_token })
