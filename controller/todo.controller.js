@@ -1,13 +1,11 @@
-const todo = require('../models/todo')
+const { Sequelize, Todo } = require('../middleware/index')
 const ValidationTodo = require('../validation/todo.validate')
 
 //Creating a user
 exports.create = async (req, res) => {
     try {
-        console.log(req.body)
-
         await ValidationTodo.validateAsync(req.body)
-        await todo.create(req.body)
+        await Todo.create({ firstName, lastName, address, contactNumber, password, access_token })
         return res.status(200).json({
             message: 'Created Database Schema for To Do.'
         })

@@ -6,5 +6,5 @@ const sequelize = new Sequelize(dbConfig.url, dbConfig.options);
 module.exports = {
     sequelize,
     Sequelize,
-    todo: require("../models/todo")(sequelize, Sequelize)
+    Todo: require("../models/todo")(sequelize, Sequelize)
 };
