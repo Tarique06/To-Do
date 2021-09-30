@@ -21,8 +21,8 @@ exports.create = async (req, res) => {
 exports.findOne = async (req, res) => {
     const { id } = req.params;
     try {
-        const user = await Users.findByPk(id)
-        if (!user) throw new Error('User not found')
+        const user = await Todo.findByPk(id)
+        if (!user) throw new Error('To do not found')
         return res.send({ user })
     }
 
