@@ -10,8 +10,6 @@ const ValidationTodo = Joi.object({
         Joi.string(),
         Joi.number()
     ]
-        .default([]),
-    is_active: Joi.boolean().default(true),
 })
 
 module.exports = ValidationTodo;
