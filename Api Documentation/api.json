@@ -1,0 +1,83 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User and Task Manangement",
+    "description": "User & Task Manangement using Swagger"
+  },
+  "host": "localhost:8080",
+  "tags": [
+    {
+      "name": "To Do",
+      "description": "Everything about To Do created by Users"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/addTodo": {
+      "post": {
+        "tags": [
+          "To Do Users"
+        ],
+        "summary": "Create a new post for To Do",
+        "description": "This API is used to create a new Post for TO DO.",
+        "parameters": [
+          {
+            "name": "To Do",
+            "in": "body",
+            "required": true,
+            "description": "Details of the To Do we want to add",
+            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/todo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succesfully created a new To Do of user.",
+            "schema": {
+              "$ref": "#/definitions/todo"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "todo": {
+      "required": [
+        "firstName",
+        "lastName",
+        "address",
+        "contactNumber",
+        "password",
+        "access_token"
+      ],
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "contactNumber": {
+          "type": "integer"
+        },
+        "password": {
+          "type": "string"
+        },
+        "access_token": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
