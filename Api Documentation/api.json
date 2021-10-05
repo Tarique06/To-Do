@@ -49,25 +49,17 @@
   "definitions": {
     "todo": {
       "required": [
-        "firstName",
-        "lastName",
-        "address",
-        "contactNumber",
+        "name",
+        "email",
         "password",
         "access_token"
       ],
       "properties": {
-        "firstName": {
+        "name": {
           "type": "string"
         },
-        "lastName": {
+        "email": {
           "type": "string"
-        },
-        "address": {
-          "type": "string"
-        },
-        "contactNumber": {
-          "type": "number"
         },
         "password": {
           "type": "string"

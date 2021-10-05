@@ -3,10 +3,10 @@ const ValidationTodo = require('../validation/todo.validate')
 
 //Creating a user
 exports.create = async (req, res) => {
-    const { firstName, lastName, address, contactNumber, password, access_token } = req.body
+    const { name, email, password, access_token } = req.body
     try {
         await ValidationTodo.validateAsync(req.body)
-        await Todo.create({ firstName, lastName, address, contactNumber, password, access_token })
+        await Todo.create({ name, email, password, access_token })
         return res.status(200).json({
             message: 'Created Database Schema for To Do.'
         })
