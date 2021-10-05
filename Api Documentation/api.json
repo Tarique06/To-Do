@@ -18,25 +18,23 @@
     "application/json"
   ],
   "paths": {
-    "/addTodo": {
+    "/api/todo/addTodo": {
       "post": {
         "tags": [
           "To Do Users"
         ],
         "summary": "Create a new post for To Do",
         "description": "This API is used to create a new Post for TO DO.",
-        "parameters": [
-          {
-            "name": "To Do",
-            "in": "body",
-            "required": true,
-            "description": "Details of the To Do we want to add",
-            "type": "string",
-            "schema": {
-              "$ref": "#/definitions/todo"
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/todo"
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "Succesfully created a new To Do of user.",
@@ -69,7 +67,7 @@
           "type": "string"
         },
         "contactNumber": {
-          "type": "integer"
+          "type": "number"
         },
         "password": {
           "type": "string"

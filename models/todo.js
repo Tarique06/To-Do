@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         contactNumber: {
-            type: Sequelize.INTEGER
+            type: Sequelize.BIGINT
         },
         password: {
             type: Sequelize.STRING
