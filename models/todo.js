@@ -8,11 +8,18 @@ module.exports = (sequelize, Sequelize) => {
         },
         password: {
             type: Sequelize.STRING
-        },
-        access_token: {
-            type: Sequelize.STRING
         }
-    });
+    },
+        {
+            defaultScope: {
+                attributes: { exclude: ['password'] },
+            },
+            scopes: {
+                withPassword: {
+                    attributes: {}
+                }
+            }
+        });
 
     return Todo;
 }

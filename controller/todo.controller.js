@@ -4,10 +4,10 @@ const bcrypt = require("bcryptjs")
 
 //Creating a user
 exports.create = async (req, res) => {
-    const { name, email, password, access_token } = req.body
+    const { name, email, password } = req.body
     try {
         await ValidationTodo.validateAsync(req.body)
-        await Todo.create({ name, email, password, access_token })
+        await Todo.create({ name, email, password })
         return res.status(200).json({
             message: 'Created Database Schema for To Do.'
         })
