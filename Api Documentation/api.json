@@ -44,6 +44,87 @@
           }
         }
       }
+    },
+    "/api/todo/:id": {
+      "get": {
+        "tags": [
+          "To Do Users"
+        ],
+        "summary": "To get details of users for TO DO",
+        "description": "This API is used to get details for TO DO.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/todo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Succesfully fetched the data for To Do of user.",
+            "schema": {
+              "$ref": "#/definitions/todo"
+            }
+          }
+        }
+      }
+    },
+    "/api/todo/updateTodo/:id": {
+      "put": {
+        "tags": [
+          "To Do Users"
+        ],
+        "summary": "To update details of users for TO DO",
+        "description": "This API is used to update details for TO DO.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/updateTodo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Succesfully updated the data for To Do of user.",
+            "schema": {
+              "$ref": "#/definitions/updateTodo"
+            }
+          }
+        }
+      }
+    },
+    "/api/todo/deleteTodo/:id": {
+      "delete": {
+        "tags": [
+          "To Do Users"
+        ],
+        "summary": "To delete a users for TO DO",
+        "description": "This API is used to delete a user in TO DO.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/todo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted a user in To Do.",
+            "schema": {
+              "$ref": "#/definitions/todo"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -65,6 +146,20 @@
           "type": "string"
         },
         "access_token": {
+          "type": "string"
+        }
+      }
+    },
+    "updateTodo": {
+      "required": [
+        "name",
+        "email"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
           "type": "string"
         }
       }
