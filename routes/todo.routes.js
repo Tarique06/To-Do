@@ -5,4 +5,8 @@ router.post("/addTodo", controller.create);
 
 router.get("/:id", controller.findOne);
 
+router.put("/updateTodo/:id", controller.update);
+
+router.delete("/deleteTodo/:id", controller.delete);
+
 module.exports = router
