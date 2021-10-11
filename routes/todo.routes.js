@@ -2,7 +2,7 @@ const controller = require('../controller/todo.controller')
 const auth = require('../middleware/authentication')
 const router = require("express").Router();
 
-router.post("/addTodo", auth, controller.create);
+router.post("/addTodo", controller.create);
 
 router.get("/:id", auth, controller.findOne);
 
