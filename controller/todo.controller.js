@@ -6,11 +6,18 @@ const bcrypt = require("bcryptjs")
 exports.create = async (req, res) => {
     const { name, email, password } = req.body
     try {
-        await ValidationTodo.validateAsync(req.body)
-        await Todo.create({ name, email, password })
-        return res.status(200).json({
-            message: 'Created Database Schema for To Do.'
-        })
+        const userAlreadyExist = await Todo.findOne({ where: { email: email } })
+        if (!userAlreadyExist) {
+            await ValidationTodo.validateAsync(req.body)
+            const hashPassword = await bcrypt.hash(password, 8)
+            await Todo.create({ name, email, password: hashPassword })
+            return res.status(200).json({
+                message: 'Created Database Schema for To Do.'
+            })
+        }
+        else {
+            res.status(302).send("Database schema for To Do already exist.....!")
+        }
     }
     catch (error) {
         console.warn(error)
