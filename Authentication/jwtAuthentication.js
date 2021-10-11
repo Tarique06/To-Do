@@ -3,7 +3,7 @@ const jwt = require('../validation/webToken')
 
 const auth = async (req, res, next) => {
     try {
-        const authHeader = req.header('Authorization')
+        const authHeader = req.headers['Authorization']
         if (!authHeader)
             throw new Error('Missing auth header')
 

@@ -5,8 +5,6 @@ const todoUser = require("./routes/todo.routes")
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./Api Documentation/api.json')
 
-const PORT = process.env.PORT
-
 const app = express()
 
 app.use(express.json())
@@ -30,6 +28,8 @@ app.use('/api/todo', todoUser)
 app.get('/', (req, res) => {
     res.status(200).send('Welcome to To Do Application.')
 })
+
+const PORT = process.env.PORT
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`)
