@@ -21,6 +21,8 @@ app.use(cors(corsOptions))
 const db = require("./middleware/index")
 db.sequelize.sync();
 
+app.use(require('./routes/auth.routes'))
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api/todo', todoUser)
