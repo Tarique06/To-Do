@@ -5,7 +5,7 @@ const auth = async (req, res, next) => {
     try {
         const authHeader = req.header('Authorization')
         if (!authHeader)
-            throw new Error('Missing auth header')
+            throw new Error('Missing auth header.')
 
         const token = authHeader.replace('Bearer ', '')
         const { jti, sub } = await jwt.verify(token)
