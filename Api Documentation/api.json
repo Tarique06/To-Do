@@ -1,16 +1,10 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "User and Task Manangement",
-    "description": "User & Task Manangement using Swagger"
+    "title": "Task Manangement",
+    "description": "Task Manangement Application in Node js using Sequelize ORM"
   },
   "host": "localhost:8080",
-  "tags": [
-    {
-      "name": "To Do",
-      "description": "Everything about To Do created by Users"
-    }
-  ],
   "consumes": [
     "application/json"
   ],
@@ -18,13 +12,13 @@
     "application/json"
   ],
   "paths": {
-    "/api/todo/addTodo": {
+    "/user/register": {
       "post": {
         "tags": [
-          "To Do Users"
+          "Users"
         ],
-        "summary": "Create a new post for To Do",
-        "description": "This API is used to create a new Post for TO DO.",
+        "summary": "Create a new post for Task Management",
+        "description": "This API is used to create a new Post for Task Management.",
         "requestBody": {
           "required": true,
           "content": {
@@ -37,7 +31,7 @@
         },
         "responses": {
           "200": {
-            "description": "Succesfully created a new To Do of user.",
+            "description": "Succesfully created a new Task Management of user.",
             "schema": {
               "$ref": "#/definitions/todo"
             }
@@ -45,10 +39,10 @@
         }
       }
     },
-    "/api/todo/:id": {
+    "/user/:id": {
       "get": {
         "tags": [
-          "To Do Users"
+          "Users"
         ],
         "summary": "To get details of users for TO DO",
         "description": "This API is used to get details for TO DO.",
@@ -72,13 +66,13 @@
         }
       }
     },
-    "/api/todo/updateTodo/:id": {
+    "/user/update/:id": {
       "put": {
         "tags": [
-          "To Do Users"
+          "Users"
         ],
-        "summary": "To update details of users for TO DO",
-        "description": "This API is used to update details for TO DO.",
+        "summary": "To update details",
+        "description": "This API is used to update details for Users.",
         "requestBody": {
           "required": true,
           "content": {
@@ -99,13 +93,13 @@
         }
       }
     },
-    "/api/todo/deleteTodo/:id": {
+    "/user/delete/:id": {
       "delete": {
         "tags": [
-          "To Do Users"
+          "Users"
         ],
-        "summary": "To delete a users for TO DO",
-        "description": "This API is used to delete a user in TO DO.",
+        "summary": "To delete a users",
+        "description": "This API is used to delete a user.",
         "requestBody": {
           "required": true,
           "content": {
@@ -130,12 +124,12 @@
   "definitions": {
     "todo": {
       "required": [
-        "name",
+        "userName",
         "email",
         "password"
       ],
       "properties": {
-        "name": {
+        "userName": {
           "type": "string"
         },
         "email": {
@@ -148,11 +142,11 @@
     },
     "updateTodo": {
       "required": [
-        "name",
+        "userName",
         "email"
       ],
       "properties": {
-        "name": {
+        "userName": {
           "type": "string"
         },
         "email": {

@@ -1,23 +1,20 @@
-const { Todo, Token } = require('../middleware/index')
-const jwt = require('../validation/webToken')
-
+const { User } = require("../database/index");
+const jwt = require("jsonwebtoken");
 const auth = async (req, res, next) => {
     try {
-        const authHeader = req.headers['Authorization']
-        if (!authHeader)
-            throw new Error('Missing auth header')
-
+        const authHeader = req.cookies.access_token;
+        if (!authHeader) {
+            throw new Error('Session expired, Re-log In')
+        }
         const token = authHeader.replace('Bearer ', '')
-        const { jti, sub } = await jwt.verify(token)
+        const { sub } = jwt.verify(token, process.env.JWT_SECRET_CODE)
 
-        if (!await Token.findOne({ where: { jti } }))
-            throw new Error('Token deleted')
-
-        const user = await Todo.findByPk(sub)
-        if (!user)
-            throw new Error('User for To Do not found')
-
-        req.token = { jti, sub }
+        const user = await User.findByPk(sub)
+        if (!user) {
+            throw new Error('User not found')
+            return;
+        }
+        req.token = { sub }
         req.user = user
         next()
     }

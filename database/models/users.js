@@ -13,6 +13,10 @@ module.exports = (sequelize, Sequelize) => {
         password: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        isAdmin: {
+            type: Sequelize.STRING,
+            allowNull: false
         }
     },
         {
@@ -25,20 +29,6 @@ module.exports = (sequelize, Sequelize) => {
                 }
             }
         });
-
-    // Todo.prototype.generateToken = async function generateToken() {
-    //     const jwtid = await nanoid()
-    //     const token = jwt.sign({ sub: this.id }, { jwtid })
-    //     const userToken = await Token.create({ jti: jwtid })
-    //     await this.addToken(userToken)
-    //     await userToken.setTodo(this)
-    //     return token
-    // }
-
-    // Users.prototype.verifyPassword = async function verifyPassword(password) {
-    //     console.log('verify Password instance method', { password, hash: this.password })
-    //     return bcrypt.compare(this.password, password)
-    // }
 
     return { User };
 }

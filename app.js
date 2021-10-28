@@ -1,15 +1,23 @@
 require('dotenv').config()
 const express = require("express")
 const cors = require("cors")
-// const todoUser = require("./routes/user.routes")
-// const swaggerUi = require('swagger-ui-express');
-// const swaggerDocument = require('./Api Documentation/api.json');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./Api Documentation/api.json');
 const db = require('./database/index');
 const session = require('express-session');
 const sequelizeStore = require('connect-session-sequelize')(session.Store);
 const cookieParser = require('cookie-parser');
+const auth = require('./Authentication/JwtAuthentication');
 
 const app = express()
+
+const isAdmin = (req, res, next) => {
+    const user = req.user;
+    if (user.isAdmin === "true") {
+        return next();
+    }
+    res.status(403).json({ unauthorized: "You are not admin." });
+}
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
@@ -21,38 +29,45 @@ var corsOptions = {
 
 app.use(cors(corsOptions))
 
-// db.sequelize.sync({ force: true }); // You can pass {force: true} in sync() yeah go ahead and run
+app.get("/onlyadmin", auth, isAdmin, (req, res) => {
+    res.status(200).json({ message: "hi admin" });
+});
 
-function extendedDefaultFields(defaults, session) {
-    return {
-        data: defaults.data,
-        expires: defaults.expires, // default 24 hours
-        userId: session.user && session.user.userId,
-    }
-}
+app.get("/onlyusers", auth, (req, res) => {
+    res.status(200).json({ message: "hi user" });
+});
 
-const store = new sequelizeStore({
-    db: db.sequelize,
-    table: "sessions",
-    extendDefaultFields: extendedDefaultFields,
-    checkExpirationInterval: 15 * 60 * 1000,
-})
+//db.sequelize.sync({ force: true });
 
-app.use(session({
-    secret: "test",
-    store,
-    saveUninitialized: true, // this will create a session forf everyone that visits;
-    resave: false,
-    proxy: true,
-}))
+// function extendedDefaultFields(defaults, session) {
+//     return {
+//         data: defaults.data,
+//         expires: defaults.expires, // default 24 hours
+//         userId: session.user && session.user.userId,
+//     }
+// }
+
+// const store = new sequelizeStore({
+//     db: db.sequelize,
+//     table: "sessions",
+//     extendDefaultFields: extendedDefaultFields,
+//     checkExpirationInterval: 15 * 60 * 1000,
+// })
+
+// app.use(session({
+//     secret: "test",
+//     store,
+//     saveUninitialized: true, // this will create a session for every user
+//     resave: false,
+//     proxy: true,
+// }))
 
 
-// app.use(require('./routes/auth.routes'))
 require('./routes')(app);
 
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// app.use('/api/todo', todoUser) // what's /api/todo it 
+// app.use('/api/todo', todoUser)  
 
 app.get('/', (req, res) => {
     res.status(200).send('Welcome to To Do Application.')

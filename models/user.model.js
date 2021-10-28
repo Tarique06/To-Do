@@ -33,16 +33,17 @@ exports.getUserByEmail = async (email) => {
     })
 }
 
-exports.registerUser = async (userObj) => {
+exports.registerUser = async (req, res, userObj) => {
     try {
-        const { username, email, password } = userObj;
+        const { username, email, password, isAdmin } = userObj;
         const hash = await bcrypt.hash(password, 10);
 
         const user = await users.create({
             username: username,
             email: email,
             password: hash,
-        })
+            isAdmin
+        });
 
         const [error, role] = await getRoleByRoleName("user");
 
@@ -51,10 +52,6 @@ exports.registerUser = async (userObj) => {
         user.addPermissions(role)
     } catch (error) {
         console.log(error)
-        res.json({
-            success: false,
-            error: error
-        })
     }
 }
 
@@ -66,44 +63,3 @@ exports.getUserByUsername = async (username) => {
     })
 }
 
-exports.addUserRoles = async (user, roleName) => {
-    try {
-        const [error, role] = await getRoleByRoleName(roleName);
-
-        if (error) throw error;
-
-        user.addPermissions(role);
-
-        return [null, true]
-
-    } catch (error) {
-        return [error, null];
-    }
-}
-
-exports.addRoles = async (userId, role) => {
-    try {
-        const user = await users.findByPk(userId, {
-            include: roles
-        })
-
-        if (!user) return false;
-
-        let userRoles = user.roles;
-
-        if (userRoles.includes(role)) {
-            throw `User already has the ${role} role!`
-        }
-
-        await roles.create({
-            name: role,
-            userId: userId
-        })
-    } catch (error) {
-        res.json({
-            success: false,
-            error: error
-        })
-    }
-
-}

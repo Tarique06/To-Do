@@ -28,6 +28,7 @@
     "nanoid": "^3.1.29",
     "pg": "^8.7.1",
     "ramda": "^0.27.1",
+    "rand-token": "^1.0.1",
     "sequelize": "^6.6.5",
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6"
