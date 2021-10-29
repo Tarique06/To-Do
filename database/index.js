@@ -11,7 +11,7 @@ const {
     users,
     task
 } = require('./schema')(sequelize, Sequelize);
-task.hasOne(users.User, { foreignKey: 'taskId' });
+users.User.hasOne(task)
 
 const User = users.User
 module.exports = db;

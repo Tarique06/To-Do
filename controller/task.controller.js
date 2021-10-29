@@ -103,17 +103,18 @@ exports.delete = (req, res) => {
 };
 
 exports.findAllPublished = (req, res) => {
-    const { page, size } = req.query
-    //const { limit, offset } = getPagination(page, size)
     const uid = req.user.id;
-    TaskModel.findAll({ where: { completed: 1, userId: uid } })
-        .then(data => {
-            //const response = getPagingData(data, page, limit);
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Some error occurred while retrieving task"
-            })
-        })
+    console.log(">>>>>>>>>>", req.user)
+    console.log(req)
+    // TaskModel.findAll({ where: { completed: "true", userId: uid } })
+    //     .then(data => {
+    //         //const response = getPagingData(data, page, limit);
+    //         res.send(data);
+    //     })
+    //     .catch(err => {
+    //         console.log(err)
+    //         res.status(500).send({
+    //             message: "Some error occurred while retrieving task"
+    //         })
+    //     })
 }

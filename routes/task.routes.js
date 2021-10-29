@@ -13,6 +13,6 @@ tasks.put("/update/:id", auth, isAdmin, controller.controller.update);
 
 tasks.delete("/:id", auth, isAdmin, controller.controller.delete);
 
-tasks.get("/completed", auth, controller.controller.findAllPublished);
+tasks.get("/sorting", auth, isAdmin, controller.controller.findAllPublished);
 
 module.exports = tasks
