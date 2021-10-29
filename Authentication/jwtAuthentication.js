@@ -1,5 +1,6 @@
 const { User } = require("../database/index");
 const jwt = require("jsonwebtoken");
+
 const auth = async (req, res, next) => {
     try {
         const authHeader = req.cookies.access_token;

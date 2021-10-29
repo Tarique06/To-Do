@@ -1,23 +1,6 @@
 const { sequelize } = require("../database/index"),
-    { users, roles, permissions } = sequelize.models,
+    { users } = sequelize.models,
     bcrypt = require("bcryptjs");
-
-const getRoleByRoleName = async (roleName) => {
-    try {
-        const role = await permissions.findOne({
-            where: {
-                role: roleName
-            }
-        })
-
-        if (!role) throw `${roleName} does not exist`
-
-        return [null, role];
-
-    } catch (error) {
-        return [error, null]
-    }
-}
 
 exports.getUserByEmail = async (email) => {
     return await users.findOne({
@@ -38,18 +21,12 @@ exports.registerUser = async (req, res, userObj) => {
         const { username, email, password, isAdmin } = userObj;
         const hash = await bcrypt.hash(password, 10);
 
-        const user = await users.create({
+        await users.create({
             username: username,
             email: email,
             password: hash,
             isAdmin
         });
-
-        const [error, role] = await getRoleByRoleName("user");
-
-        if (error) throw error;
-
-        user.addPermissions(role)
     } catch (error) {
         console.log(error)
     }

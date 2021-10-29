@@ -2,7 +2,6 @@ const bcrypt = require("bcryptjs");
 const { UserModel } = require("../models");
 var jwt = require('jsonwebtoken');
 const { User } = require('../database/index');
-const auth = require('../Authentication/JwtAuthentication')
 
 const authenticationCallback = async (email, password) => {
     try {
@@ -26,17 +25,21 @@ const authenticationCallback = async (email, password) => {
 
 exports.authenticate = async (req, res, next) => {
     try {
-        const { email, password } = req.body;
+        const { email, password, id } = req.body;
         const [error, user] = await authenticationCallback(email, password);
 
+        if (!user) {
+            return res.json({
+                error: 'No Such User'
+            })
+        }
+        // please wait, just let me check once.
         var token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET_CODE, {
             expiresIn: 300
         });
         if (error) {
-            // throw error;
             throw new Error(`${error}`);
         }
-
 
         return res.cookie("access_token", token, {
             httpOnly: true
