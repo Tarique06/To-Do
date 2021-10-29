@@ -39,33 +39,6 @@
         }
       }
     },
-    "/user/:id": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "summary": "To get details of users for TO DO",
-        "description": "This API is used to get details for TO DO.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/todo"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Succesfully fetched the data for To Do of user.",
-            "schema": {
-              "$ref": "#/definitions/todo"
-            }
-          }
-        }
-      }
-    },
     "/user/update/:id": {
       "put": {
         "tags": [
@@ -85,7 +58,7 @@
         },
         "responses": {
           "200": {
-            "description": "Succesfully updated the data for To Do of user.",
+            "description": "Succesfully updated the data of user.",
             "schema": {
               "$ref": "#/definitions/updateTodo"
             }
@@ -112,9 +85,117 @@
         },
         "responses": {
           "200": {
-            "description": "Succesfully deleted a user in To Do.",
+            "description": "Succesfully deleted a user.",
             "schema": {
               "$ref": "#/definitions/todo"
+            }
+          }
+        }
+      }
+    },
+    "/task": {
+      "post": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Create a new task for Task Management",
+        "description": "This API is used to create a new Post for Task Management.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/task"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Succesfully created a new Task Management of user.",
+            "schema": {
+              "$ref": "#/definitions/task"
+            }
+          }
+        }
+      }
+    },
+    "/task/update/:id": {
+      "put": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "To update details",
+        "description": "This API is used to update details for Task.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/updateTask"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Succesfully updated the data of Task.",
+            "schema": {
+              "$ref": "#/definitions/updateTask"
+            }
+          }
+        }
+      }
+    },
+    "/task/fetch": {
+      "get": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "Get the task",
+        "description": "This API is used to get the task for Task Management.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/task"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Succesfully fetched the task Task Management of user.",
+            "schema": {
+              "$ref": "#/definitions/task"
+            }
+          }
+        }
+      }
+    },
+    "/task/:id": {
+      "delete": {
+        "tags": [
+          "Task"
+        ],
+        "summary": "To delete a task",
+        "description": "This API is used to delete a Task.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/task"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Succesfully deleted a user.",
+            "schema": {
+              "$ref": "#/definitions/task"
             }
           }
         }
@@ -150,6 +231,34 @@
           "type": "string"
         },
         "email": {
+          "type": "string"
+        }
+      }
+    },
+    "task": {
+      "required": [
+        "description",
+        "completed"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "completed": {
+          "type": "string"
+        }
+      }
+    },
+    "updateTask": {
+      "required": [
+        "description",
+        "completed"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "completed": {
           "type": "string"
         }
       }

@@ -33,7 +33,6 @@ exports.authenticate = async (req, res, next) => {
                 error: 'No Such User'
             })
         }
-        // please wait, just let me check once.
         var token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET_CODE, {
             expiresIn: 300
         });

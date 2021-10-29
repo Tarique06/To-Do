@@ -5,11 +5,11 @@ const isAdmin = require('../Authentication/permission')
 
 tasks.post("/", auth, isAdmin, controller.controller.create);
 
-tasks.get("/", auth, controller.controller.findAll);
+tasks.get("/fetch", auth, controller.controller.findAll);
 
 tasks.get("/:id", auth, controller.controller.findOne);
 
-tasks.put("/:id", auth, isAdmin, controller.controller.update);
+tasks.put("/update/:id", auth, isAdmin, controller.controller.update);
 
 tasks.delete("/:id", auth, isAdmin, controller.controller.delete);
 

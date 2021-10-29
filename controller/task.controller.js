@@ -3,9 +3,6 @@ const { Task: TaskModel } = require("../database/index");
 const { Op } = require('sequelize');
 const { getPagination, getPagingData } = require('../controller/userFunction');
 
-
-
-//creating a new TaskModels
 exports.create = async (req, res) => {
     console.log("#message:", req.user.id)
     try {
@@ -23,7 +20,6 @@ exports.create = async (req, res) => {
     }
 };
 
-//Read all Tasks list
 exports.findAll = (req, res) => {
     const description = req.query.description;
     const uid = req.user.id
@@ -41,7 +37,6 @@ exports.findAll = (req, res) => {
 };
 
 
-//Finding one Tasks list with id
 exports.findOne = async (req, res) => {
     const { id } = req.params;
     try {
@@ -58,7 +53,6 @@ exports.findOne = async (req, res) => {
 }
 
 
-//updating an existing TaskModels
 exports.update = (req, res) => {
     const id = req.params.id;
 
@@ -83,7 +77,7 @@ exports.update = (req, res) => {
         });
 };
 
-//deleting an existing TaskModels
+
 exports.delete = (req, res) => {
     const id = req.params.id;
 
@@ -108,7 +102,6 @@ exports.delete = (req, res) => {
         });
 };
 
-//Pagination 
 exports.findAllPublished = (req, res) => {
     const { page, size } = req.query
     //const { limit, offset } = getPagination(page, size)
