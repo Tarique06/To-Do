@@ -13,7 +13,6 @@ const auth = async (req, res, next) => {
         const user = await User.findByPk(sub)
         if (!user) {
             throw new Error('User not found')
-            return;
         }
         req.token = { sub }
         req.user = user

@@ -1,7 +1,6 @@
 const { Task: TaskModel } = require("../database/index");
 
 const { Op } = require('sequelize');
-const { getPagination, getPagingData } = require('../controller/userFunction');
 
 exports.create = async (req, res) => {
     console.log("#message:", req.user.id)
@@ -104,17 +103,14 @@ exports.delete = (req, res) => {
 
 exports.findAllPublished = (req, res) => {
     const uid = req.user.id;
-    console.log(">>>>>>>>>>", req.user)
-    console.log(req)
-    // TaskModel.findAll({ where: { completed: "true", userId: uid } })
-    //     .then(data => {
-    //         //const response = getPagingData(data, page, limit);
-    //         res.send(data);
-    //     })
-    //     .catch(err => {
-    //         console.log(err)
-    //         res.status(500).send({
-    //             message: "Some error occurred while retrieving task"
-    //         })
-    //     })
+    TaskModel.findAll({ where: { completed: "true" } })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).send({
+                message: "Some error occurred while retrieving task"
+            })
+        })
 }
