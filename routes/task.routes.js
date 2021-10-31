@@ -7,12 +7,14 @@ tasks.post("/", auth, isAdmin, controller.controller.create);
 
 tasks.get("/fetch", auth, controller.controller.findAll);
 
+tasks.get("/sorting", auth, isAdmin, controller.controller.findAllPublished);
+
 tasks.get("/:id", auth, controller.controller.findOne);
 
 tasks.put("/update/:id", auth, isAdmin, controller.controller.update);
 
 tasks.delete("/:id", auth, isAdmin, controller.controller.delete);
 
-tasks.get("/sorting", auth, isAdmin, controller.controller.findAllPublished);
+
 
 module.exports = tasks
